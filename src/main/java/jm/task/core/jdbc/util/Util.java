@@ -11,7 +11,7 @@ public class Util {
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "111222";
 
-    public void getConnection() {
+    public static Connection getConnection() {
         Connection connection = null;
         try {
             Class.forName(DB_DRIVER);
@@ -21,5 +21,6 @@ public class Util {
             System.out.println("Connection ERROR");
             throw new RuntimeException(e);
         }
+        return connection;
     }
 }
