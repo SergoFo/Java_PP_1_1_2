@@ -61,7 +61,11 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } /*finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }*/
     }
 
     public void removeUserById(long id) throws SQLException {                   //Удаление пользователя по ID
