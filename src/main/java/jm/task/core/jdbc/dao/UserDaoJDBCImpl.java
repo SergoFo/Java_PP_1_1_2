@@ -14,7 +14,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
     }
 
-    public void createUsersTable() throws SQLException {               //Создание таблицы пользователей
+    public void createUsersTable() {               //Создание таблицы пользователей
 
         String sql = "CREATE TABLE IF NOT EXISTS Users (" +
                 "Id int auto_increment primary key, " +
@@ -27,30 +27,21 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
-        } /*finally {
-            if (connection != null) {
-                connection.close();
-            }
-        }*/
+        }
     }
 
 
-    public void dropUsersTable() throws SQLException {                           //Удаление таблицы
+    public void dropUsersTable() {                                                 //Удаление таблицы
         String sql = "DROP TABLE IF EXISTS Users";
 
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } /*finally {
-            if (connection != null) {
-                connection.close();
-            }
-        }*/
-
+        }
     }
 
-    public void saveUser(String name, String lastName, byte age) {   //Добавление пользователя
+    public void saveUser(String name, String lastName, byte age) {                   //Добавление пользователя
         String sql = "INSERT INTO Users (NAME, LASTNAME, AGE) VALUES(?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
@@ -61,14 +52,10 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } /*finally {
-            if (connection != null) {
-                connection.close();
-            }
-        }*/
+        }
     }
 
-    public void removeUserById(long id) throws SQLException {                   //Удаление пользователя по ID
+    public void removeUserById(long id) {                     //Удаление пользователя по ID
 
         String sql = "DELETE FROM Users WHERE ID = ?";
 
@@ -79,16 +66,10 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } /*finally {
-            if (connection != null) {
-                connection.close();
-            }
-        }*/
-
-
+        }
     }
 
-    public List<User> getAllUsers() throws SQLException {          //Получение всех пользователей из БД
+    public List<User> getAllUsers() {                                      //Получение всех пользователей из БД
         List<User> usersList = new ArrayList<>();
 
         String sql = "SELECT ID, NAME, LASTNAME, AGE FROM Users";
@@ -108,25 +89,17 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } /*finally {
-            if (connection != null) {
-                connection.close();
-            }
-        }*/
+        }
         return usersList;
     }
 
-    public void cleanUsersTable() throws SQLException {                               //Очистка таблицы
+    public void cleanUsersTable() {                               //Очистка таблицы
         String sql = "TRUNCATE TABLE Users";
 
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } /*finally {
-            if (connection != null) {
-                connection.close();
-            }
-        }*/
+        }
     }
 }
