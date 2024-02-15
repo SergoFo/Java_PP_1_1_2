@@ -16,7 +16,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
     public void createUsersTable() throws SQLException {               //Создание таблицы пользователей
 
-        String sql = "CREATE TABLE Users (" +
+        String sql = "CREATE TABLE IF NOT EXISTS Users (" +
                 "Id int auto_increment primary key, " +
                 "Name varchar(40) not null, " +
                 "Lastname varchar(40) not null, " +
@@ -27,30 +27,30 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        } /*finally {
             if (connection != null) {
                 connection.close();
             }
-        }
+        }*/
     }
 
 
     public void dropUsersTable() throws SQLException {                           //Удаление таблицы
-        String sql = "DROP TABLE Users";
+        String sql = "DROP TABLE IF EXISTS Users";
 
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
+        } /*finally {
             if (connection != null) {
                 connection.close();
             }
-        }
+        }*/
 
     }
 
-    public void saveUser(String name, String lastName, byte age) throws SQLException {   //Добавление пользователя
+    public void saveUser(String name, String lastName, byte age) {   //Добавление пользователя
         String sql = "INSERT INTO Users (NAME, LASTNAME, AGE) VALUES(?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
@@ -78,12 +78,12 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
+            e.printStackTrace();
+        } /*finally {
             if (connection != null) {
                 connection.close();
             }
-        }
+        }*/
 
 
     }
@@ -108,11 +108,11 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        } /*finally {
             if (connection != null) {
                 connection.close();
             }
-        }
+        }*/
         return usersList;
     }
 
@@ -123,10 +123,10 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
+        } /*finally {
             if (connection != null) {
                 connection.close();
             }
-        }
+        }*/
     }
 }
