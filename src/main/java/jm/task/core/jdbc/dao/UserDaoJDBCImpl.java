@@ -1,13 +1,13 @@
 package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
-import jm.task.core.jdbc.util.Util;
+// import jm.task.core.jdbc.util.Util;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoJDBCImpl extends Util implements UserDao {
+/*public class UserDaoJDBCImpl extends Util implements UserDao {
     Connection connection = getConnection();
 
     public UserDaoJDBCImpl() {
@@ -102,4 +102,4 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             throw new RuntimeException(e);
         }
     }
-}
+}*/
